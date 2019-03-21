@@ -284,7 +284,7 @@ class metrics(object):
         pattern = feature['midi_pattern']
         pattern.make_ticks_abs()
         resolution = pattern.resolution
-        total_used_note = self.total_used_note(pattern, track_num=track_num)
+        total_used_note = self.total_used_note(feature, track_num=track_num)
         d_note = np.zeros((total_used_note - 1))
         current_note = 0
         counter = 0
