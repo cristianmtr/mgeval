@@ -164,7 +164,7 @@ if __name__ == "__main__":
     set1 = glob.glob(
         'd:/thesis_code/model_fulldata1/samples/sessiontune45840_transposed/temp*.mid')
     set1name = 'generated'
-    print 'we have %s samples' % len(set1)
+    print('we have %s samples' % len(set1))
     num_samples = len(set1)
 
     set2 = glob.glob('d:/data/folkdataset/4_transposed_split_4bars/*.mid')
