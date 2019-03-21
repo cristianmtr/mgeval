@@ -71,20 +71,19 @@ def main(set1, set2, set1name, set2name, dstfolder):
     # statistic analysis: absolute measurement
     absolute_measurement = ""
     for i in range(0, len(metrics_list)):
-        absolute_measurement += "\n" + metrics_list[i] + ':'
-        absolute_measurement += "\n" + '------------------------'
+        absolute_measurement += metrics_list[i] + ':'
+        absolute_measurement += "\n" + '------------------------\n'
         absolute_measurement += "\n" + set1name
         absolute_measurement += "\n" + \
             '  mean: %s' % np.mean(set1_eval[metrics_list[i]], axis=0)
         absolute_measurement += "\n" + \
             '  std: %s' % np.std(set1_eval[metrics_list[i]], axis=0)
 
-        absolute_measurement += "\n" + '------------------------'
-        absolute_measurement += "\n" + set2name
+        absolute_measurement += "\n\n" + set2name
         absolute_measurement += "\n" + \
             '  mean: %s' % np.mean(set2_eval[metrics_list[i]], axis=0)
         absolute_measurement += "\n" + \
-            '  std: %s' % np.std(set2_eval[metrics_list[i]], axis=0)
+            '  std: %s\n\n' % np.std(set2_eval[metrics_list[i]], axis=0)
 
     with open(os.path.join(dstfolder, '1absolute_measurement.txt'), 'w') as f:
         f.writelines(absolute_measurement)
@@ -141,18 +140,18 @@ def main(set1, set2, set1name, set2name, dstfolder):
     # the difference of intra-set and inter-set distances.
     distance_text = ''
     for i in range(0, len(metrics_list)):
-        distance_text += "\n" + metrics_list[i] + ':'
-        distance_text += "\n" + '------------------------'
+        distance_text += metrics_list[i] + ':\n'
+        distance_text += '------------------------\n' 
         distance_text += "\n" + set1name
-        distance_text += "\n" + '  Kullback–Leibler divergence: %s' % utils.kl_dist(
+        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % utils.kl_dist(
             plot_set1_intra[i], plot_sets_inter[i])
         distance_text += "\n" + '  Overlap area: %s' % utils.overlap_area(
             plot_set1_intra[i], plot_sets_inter[i])
 
         distance_text += "\n" + set2name
-        distance_text += "\n" + '  Kullback–Leibler divergence: %s' % utils.kl_dist(
+        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % utils.kl_dist(
             plot_set2_intra[i], plot_sets_inter[i])
-        distance_text += "\n" + '  Overlap area: %s' % utils.overlap_area(
+        distance_text += "\n" + '  Overlap area: %s\n\n' % utils.overlap_area(
             plot_set2_intra[i], plot_sets_inter[i])
 
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
@@ -161,13 +160,15 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
 # Assign dataset path
 if __name__ == "__main__":
+    globstr1 = 'd:/thesis_code/model_fulldata1/samples/sessiontune45840_transposed/temp*.mid'
     set1 = glob.glob(
-        'd:/thesis_code/model_fulldata1/samples/sessiontune45840_transposed/temp*.mid')
+        globstr1)
     set1name = 'generated'
     print 'we have %s samples' % len(set1)
     num_samples = len(set1)
 
-    set2 = glob.glob('d:/data/folkdataset/4_transposed_split_4bars/*.mid')
+    globstr2 = 'd:/data/folkdataset/4_transposed_split_4bars/*.mid'
+    set2 = glob.glob(globstr2)
     random.shuffle(set2)
     set2 = set2[:num_samples]
 
@@ -176,5 +177,8 @@ if __name__ == "__main__":
     dstfolder = 'comparison1'
     if not os.path.exists(dstfolder):
         os.mkdir(dstfolder)
+
+    with open(os.path.join(dstfolder, '0info.txt'), 'w') as f:
+        f.writelines("Comparison between %s and %s" %(globstr1, globstr2))
 
     main(set1, set2, set1name, set2name, dstfolder)
