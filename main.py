@@ -181,4 +181,4 @@ if __name__ == "__main__":
     with open(os.path.join(dstfolder, '0info.txt'), 'w') as f:
         f.writelines("Comparison between %s and %s" %(globstr1, globstr2))
 
-    main(set1, set2, set1name, set2name, dstfolder)
+    main(set2, set1, set2name, set1name, dstfolder) # order matters in KL

@@ -1,0 +1,1 @@
+Comparison between d:/thesis_code/model_fulldata1/samples/sessiontune45840_transposed/temp*.mid and d:/data/folkdataset/4_transposed_split_4bars/*.mid

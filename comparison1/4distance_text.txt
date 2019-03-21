@@ -1,0 +1,40 @@
+avg_pitch_shift:
+------------------------
+
+generated
+  Kullback-Leibler divergence: 0.1946642963825513
+  Overlap area: 0.824287281855
+training
+  Kullback-Leibler divergence: 0.031109776236564128
+  Overlap area: 0.877579423861
+
+pitch_range:
+------------------------
+
+generated
+  Kullback-Leibler divergence: 0.02079226367531456
+  Overlap area: 0.803878034417
+training
+  Kullback-Leibler divergence: 0.09648553021211981
+  Overlap area: 0.470361745061
+
+total_pitch_class_histogram:
+------------------------
+
+generated
+  Kullback-Leibler divergence: 0.0980964367770965
+  Overlap area: 0.74342519737
+training
+  Kullback-Leibler divergence: 0.3826367137602199
+  Overlap area: 0.808929816342
+
+total_used_pitch:
+------------------------
+
+generated
+  Kullback-Leibler divergence: 0.22450107969478833
+  Overlap area: 0.53593352907
+training
+  Kullback-Leibler divergence: 0.1613533816606416
+  Overlap area: 0.430370236968
+
