@@ -35,6 +35,7 @@ from sklearn.model_selection import LeaveOneOut
 
 def main(set1, set2, set1name, set2name, dstfolder):
 
+    num_samples = len(set1)
     set1_eval = {
         'total_used_pitch': np.zeros((num_samples, 1)),
         'total_pitch_class_histogram': np.zeros((num_samples, 12)),

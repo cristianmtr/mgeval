@@ -1,0 +1,40 @@
+avg_pitch_shift:
+------------------------
+
+hook theory
+  Kullback-Leibler divergence: 0.013910304081285494
+  Overlap area: 0.904717990704
+folk
+  Kullback-Leibler divergence: 0.28129186421587343
+  Overlap area: 0.735948636803
+
+pitch_range:
+------------------------
+
+hook theory
+  Kullback-Leibler divergence: 0.30720533162612956
+  Overlap area: 0.696153858465
+folk
+  Kullback-Leibler divergence: 0.09239375173094791
+  Overlap area: 0.569330302532
+
+total_pitch_class_histogram:
+------------------------
+
+hook theory
+  Kullback-Leibler divergence: 0.0107041583862163
+  Overlap area: 0.765705596024
+folk
+  Kullback-Leibler divergence: 0.062495826310551075
+  Overlap area: 0.558293181945
+
+total_used_pitch:
+------------------------
+
+hook theory
+  Kullback-Leibler divergence: 0.24418323384016868
+  Overlap area: 0.680207092541
+folk
+  Kullback-Leibler divergence: 0.18903671350699314
+  Overlap area: 0.58327306679
+
