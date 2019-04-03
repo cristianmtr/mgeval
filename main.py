@@ -37,10 +37,17 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     num_samples = len(set1)
     set1_eval = {
+        # pitch related
         'total_used_pitch': np.zeros((num_samples, 1)),
         'total_pitch_class_histogram': np.zeros((num_samples, 12)),
         'pitch_range': np.zeros((num_samples, 1)),
-        'avg_pitch_shift': np.zeros((num_samples, 1))
+        'avg_pitch_shift': np.zeros((num_samples, 1)),
+        'pitch_class_transition_matrix': np.zeros((num_samples, 12, 12)),
+        # rhythm
+        'total_used_note': np.zeros((num_samples, 1)),
+        'avg_IOI': np.zeros((num_samples, 1)),
+        'note_length_hist': np.zeros((num_samples, 12)),
+        'note_length_transition_matrix': np.zeros((num_samples, 12, 12)),
     }
 
     metrics_list = list(set1_eval.keys())
@@ -55,10 +62,17 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     # repeat for second dataset
     set2_eval = {
+        # pitch related
         'total_used_pitch': np.zeros((num_samples, 1)),
         'total_pitch_class_histogram': np.zeros((num_samples, 12)),
         'pitch_range': np.zeros((num_samples, 1)),
-        'avg_pitch_shift': np.zeros((num_samples, 1))
+        'avg_pitch_shift': np.zeros((num_samples, 1)),
+        'pitch_class_transition_matrix': np.zeros((num_samples, 12, 12)),
+        # rhythm
+        'total_used_note': np.zeros((num_samples, 1)),
+        'avg_IOI': np.zeros((num_samples, 1)),
+        'note_length_hist': np.zeros((num_samples, 12)),
+        'note_length_transition_matrix': np.zeros((num_samples, 12, 12)),
     }
 
     for i in range(0, num_samples):
@@ -141,6 +155,7 @@ def main(set1, set2, set1name, set2name, dstfolder):
     # the difference of intra-set and inter-set distances.
     distance_text = ''
     for i in range(0, len(metrics_list)):
+        print(metrics_list[i])
         distance_text += metrics_list[i] + ':\n'
         distance_text += '------------------------\n' 
         distance_text += "\n" + set1name
@@ -157,6 +172,10 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
         f.writelines(distance_text)
+
+    np.save(os.path.join(dstfolder, 'set1.npy'), set1_eval)
+    np.save(os.path.join(dstfolder, 'set2.npy'), set2_eval)
+    return
 
 
 # Assign dataset path
