@@ -1,0 +1,90 @@
+pitch_class_transition_matrix:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.06527324405737138
+  Overlap area: 0.94626768759
+hook
+  Kullback-Leibler divergence: 0.11996747174737016
+  Overlap area: 0.887626481503
+
+total_used_note:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.0026609523952898
+  Overlap area: 0.93175339872
+hook
+  Kullback-Leibler divergence: 0.053674786678775815
+  Overlap area: 0.836342595824
+
+note_length_transition_matrix:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.06163204919478864
+  Overlap area: 0.894397422219
+hook
+  Kullback-Leibler divergence: 0.04101133505463527
+  Overlap area: 0.824913046041
+
+avg_pitch_shift:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 1.2124363996854273
+  Overlap area: 0.665086783864
+hook
+  Kullback-Leibler divergence: 0.07164270757716393
+  Overlap area: 0.794810286646
+
+pitch_range:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.005471799229859806
+  Overlap area: 0.932264228632
+hook
+  Kullback-Leibler divergence: 0.12879261519995222
+  Overlap area: 0.837270325986
+
+total_pitch_class_histogram:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.021149451167132023
+  Overlap area: 0.926829775078
+hook
+  Kullback-Leibler divergence: 0.04699522397687601
+  Overlap area: 0.945613014899
+
+total_used_pitch:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.010759640462108476
+  Overlap area: 0.852326633874
+hook
+  Kullback-Leibler divergence: 0.02691427710325264
+  Overlap area: 0.870598984877
+
+note_length_hist:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.06757845614036082
+  Overlap area: 0.822869577391
+hook
+  Kullback-Leibler divergence: 0.019008832948904448
+  Overlap area: 0.931125093008
+
+avg_IOI:
+------------------------
+
+bi2lstm32_attention
+  Kullback-Leibler divergence: 0.13564894350010986
+  Overlap area: 0.842351858651
+hook
+  Kullback-Leibler divergence: 0.020071973290485753
+  Overlap area: 0.875683454739
+
