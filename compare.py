@@ -15,9 +15,10 @@ parser.add_argument('firstname',type=str, help="name of first set")
 parser.add_argument('second',type=str, help="dir to second set")
 parser.add_argument('secondname',type=str, help="name of second set")
 parser.add_argument('comparison',type=str, help="comparison folder/name")
+parser.add_argument('--mid_pattern', type=str, default='temp*.mid', help="pattern for midi files in directories. default = 'temp*.mid'")
 args = parser.parse_args()
 
-globstr1 = os.path.join(args.first, 'temp*.mid')
+globstr1 = os.path.join(args.first, args.mid_pattern)
 set1 = glob.glob(
     globstr1)
 
@@ -28,7 +29,7 @@ if len(set1) > num_samples:
 set1name = args.firstname
 num_samples = len(set1)
 
-globstr2 = os.path.join(args.second, 'temp*.mid')
+globstr2 = os.path.join(args.second, args.mid_pattern)
 set2 = glob.glob(globstr2)
 
 if len(set2) > num_samples:
