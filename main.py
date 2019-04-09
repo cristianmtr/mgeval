@@ -85,19 +85,21 @@ def main(set1, set2, set1name, set2name, dstfolder):
     # statistic analysis: absolute measurement
     absolute_measurement = ""
     for i in range(0, len(metrics_list)):
-        absolute_measurement += metrics_list[i] + ':'
-        absolute_measurement += "\n" + '------------------------\n'
-        absolute_measurement += "\n" + set1name
-        absolute_measurement += "\n" + \
-            '  mean: %s' % np.mean(set1_eval[metrics_list[i]], axis=0)
-        absolute_measurement += "\n" + \
-            '  std: %s' % np.std(set1_eval[metrics_list[i]], axis=0)
+        if "transition" not in metrics_list[i] \
+            and "hist" not in metrics_list[i]:
+            absolute_measurement += metrics_list[i] + ':'
+            absolute_measurement += "\n" + '------------------------\n'
+            absolute_measurement += "\n" + set1name
+            absolute_measurement += "\n" + \
+                '  mean: %s' % np.mean(set1_eval[metrics_list[i]], axis=0)
+            absolute_measurement += "\n" + \
+                '  std: %s' % np.std(set1_eval[metrics_list[i]], axis=0)
 
-        absolute_measurement += "\n\n" + set2name
-        absolute_measurement += "\n" + \
-            '  mean: %s' % np.mean(set2_eval[metrics_list[i]], axis=0)
-        absolute_measurement += "\n" + \
-            '  std: %s\n\n' % np.std(set2_eval[metrics_list[i]], axis=0)
+            absolute_measurement += "\n\n" + set2name
+            absolute_measurement += "\n" + \
+                '  mean: %s' % np.mean(set2_eval[metrics_list[i]], axis=0)
+            absolute_measurement += "\n" + \
+                '  std: %s\n\n' % np.std(set2_eval[metrics_list[i]], axis=0)
 
     with open(os.path.join(dstfolder, '1absolute_measurement.txt'), 'w') as f:
         f.writelines(absolute_measurement)
@@ -250,6 +252,12 @@ def main(set1, set2, set1name, set2name, dstfolder):
     plt.clf()
 
     ## 
+
+    ## total_pitch_class_histogram
+
+
+    ## note_length_hist
+
     np.save(os.path.join(dstfolder, 'set1.npy'), set1_eval)
     np.save(os.path.join(dstfolder, 'set2.npy'), set2_eval)
     return
