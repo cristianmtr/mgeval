@@ -1,0 +1,1 @@
+Comparison between D:\thesis_code\model_folk100k_melody_bi2lstm32_attention\samples\lamb_transposed\temp*.mid and D:\thesis_code\model_folk100k_pianoroll_bi2lstm32_attention\samples\lamb_transposed\temp*.mid

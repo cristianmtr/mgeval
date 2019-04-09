@@ -1,1 +1,0 @@
-Comparison between D:\data\hooktheory_dataset\3_transposed\*.mid and d:/data/folkdataset/3_transposed/*.mid

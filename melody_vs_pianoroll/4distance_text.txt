@@ -1,0 +1,90 @@
+pitch_class_transition_matrix:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.06412113240918219
+  Overlap area: 0.903167616162
+pianoroll
+  Kullback-Leibler divergence: 0.25612646001978184
+  Overlap area: 0.444128138025
+
+total_used_note:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.11876136395211004
+  Overlap area: 0.508077507426
+pianoroll
+  Kullback-Leibler divergence: 0.10759918909445669
+  Overlap area: 0.730064528054
+
+note_length_transition_matrix:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.3758354994626283
+  Overlap area: 0.436463520429
+pianoroll
+  Kullback-Leibler divergence: 0.2986547127678252
+  Overlap area: 0.533655094238
+
+avg_pitch_shift:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.09139334160740874
+  Overlap area: 0.778921876017
+pianoroll
+  Kullback-Leibler divergence: 0.020615198054472927
+  Overlap area: 0.693569440886
+
+pitch_range:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.016585671391764055
+  Overlap area: 0.835263853909
+pianoroll
+  Kullback-Leibler divergence: 0.03294109864618362
+  Overlap area: 0.758084395183
+
+total_pitch_class_histogram:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.026294968596153608
+  Overlap area: 0.941682518019
+pianoroll
+  Kullback-Leibler divergence: 0.017965617015507473
+  Overlap area: 0.809642163624
+
+total_used_pitch:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.011524014693386535
+  Overlap area: 0.888464771138
+pianoroll
+  Kullback-Leibler divergence: 0.20220770940441224
+  Overlap area: 0.834419808092
+
+note_length_hist:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.3111499370426303
+  Overlap area: 0.328930675306
+pianoroll
+  Kullback-Leibler divergence: 0.06904952459357067
+  Overlap area: 0.684850083103
+
+avg_IOI:
+------------------------
+
+melody
+  Kullback-Leibler divergence: 0.28806969053494547
+  Overlap area: 0.385615914358
+pianoroll
+  Kullback-Leibler divergence: 0.13949941621090262
+  Overlap area: 0.728850291314
+

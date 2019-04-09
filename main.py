@@ -2,13 +2,12 @@
 # coding: utf-8
 import output
 import os
-import midi
 import glob
 import numpy as np
 import random
-import pretty_midi
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from mgeval import core, utils
 from sklearn.model_selection import LeaveOneOut
 # plt.style.use('ggplot')
@@ -173,6 +172,84 @@ def main(set1, set2, set1name, set2name, dstfolder):
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
         f.writelines(distance_text)
 
+    # pitch tm
+    mpl.rc('text', usetex=True)
+    mpl.rc('font',family = 'sans-serif',  size=20)
+
+    note_names = [
+        "C",
+        'Db',
+        "D",
+        "Eb",
+        "E",
+        "F",
+        "Gb",
+        "G",
+        "Ab",
+        "A",
+        "Bb",
+        "B"
+    ]
+
+    plt.clf()
+    plt.figure(figsize=(12,12))
+    sns.heatmap(np.mean(set1_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues', vmax=1.7)
+    sns.set(font_scale=1.4)
+    plt.xticks([i+.5 for i in range(len(note_names))], note_names)
+    plt.yticks([i+.5 for i in range(len(note_names))], note_names)
+    # plt.tick_params(axis='both', which='major', labelsize=16)
+    plt.title("Pitch transition matrix for %s samples" %set1name)
+    plt.gcf().savefig(os.path.join(dstfolder, '5pitch_tm_%s.png' %set1name), bbox_inches='tight')
+
+    plt.clf()
+    plt.figure(figsize=(12,12))
+    sns.heatmap(np.mean(set2_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues', vmax=1.7)
+    sns.set(font_scale=1.4)
+    plt.xticks([i+.5 for i in range(len(note_names))], note_names)
+    plt.yticks([i+.5 for i in range(len(note_names))], note_names)
+    # plt.tick_params(axis='both', which='major', labelsize=16)
+    plt.title("Pitch transition matrix for %s samples" %set2name)
+    plt.gcf().savefig(os.path.join(dstfolder, '5pitch_tm_%s.png' %set2name), bbox_inches='tight')
+    # nl tm
+
+    note_lens = [
+        "$W$",
+        "$H$",
+        "$Q$",
+        "$E$",
+        "$S$",
+        "$H .$",
+        "$Q .$",
+        "$E .$",
+        "$S .$",
+        "$H t$ ",
+        "$Q t$",
+        "$E t$",
+        
+    ]
+
+    plt.clf()
+    plt.figure(figsize=(12,12))
+    sns.heatmap(np.mean(set1_eval['note_length_transition_matrix'],axis=0), cmap="Reds", vmax=7)
+    sns.set(font_scale=1.4)
+    plt.xticks([i+.5 for i in range(len(note_lens))], note_lens)
+    plt.yticks([i+.5 for i in range(len(note_lens))], note_lens)
+    plt.tick_params(axis='both', which='major', labelsize=16)
+    plt.title("Note length transition matrix for %s samples" %set1name)
+    plt.gcf().savefig(os.path.join(dstfolder, '5notelength_tm_%s.png' %set1name), bbox_inches='tight')
+
+    plt.clf()
+    plt.figure(figsize=(12,12))
+    sns.heatmap(np.mean(set2_eval['note_length_transition_matrix'],axis=0), cmap="Reds", vmax=7)
+    sns.set(font_scale=1.4)
+    plt.xticks([i+.5 for i in range(len(note_lens))], note_lens)
+    plt.yticks([i+.5 for i in range(len(note_lens))], note_lens)
+    plt.tick_params(axis='both', which='major', labelsize=16)
+    plt.title("Note length transition matrix for %s samples" %set2name)
+    plt.gcf().savefig(os.path.join(dstfolder, '5notelength_tm_%s.png' %set2name), bbox_inches='tight')
+    plt.clf()
+
+    ## 
     np.save(os.path.join(dstfolder, 'set1.npy'), set1_eval)
     np.save(os.path.join(dstfolder, 'set2.npy'), set2_eval)
     return
