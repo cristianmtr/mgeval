@@ -2,89 +2,89 @@ pitch_class_transition_matrix:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.06412113240918219
-  Overlap area: 0.903167616162
+  Kullback-Leibler divergence: 0.3925230240852378
+  Overlap area: 0.84031128743
 pianoroll
-  Kullback-Leibler divergence: 0.2561264600197819
-  Overlap area: 0.444128138025
+  Kullback-Leibler divergence: 0.24609613004600006
+  Overlap area: 0.42990650995
 
 total_used_note:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.1187613639521099
-  Overlap area: 0.508077507426
+  Kullback-Leibler divergence: 0.13119415312691318
+  Overlap area: 0.626754285814
 pianoroll
-  Kullback-Leibler divergence: 0.10759918909445652
-  Overlap area: 0.730064528054
+  Kullback-Leibler divergence: 0.03652900281814855
+  Overlap area: 0.799494473999
 
 note_length_transition_matrix:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.37583549946262834
-  Overlap area: 0.436463520429
+  Kullback-Leibler divergence: 0.5544536097338101
+  Overlap area: 0.488979532694
 pianoroll
-  Kullback-Leibler divergence: 0.2986547127678252
-  Overlap area: 0.533655094238
+  Kullback-Leibler divergence: 0.3092224715410349
+  Overlap area: 0.524848830663
 
 avg_pitch_shift:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.0913933416074085
-  Overlap area: 0.778921876017
+  Kullback-Leibler divergence: 0.3535394551236994
+  Overlap area: 0.515646708949
 pianoroll
-  Kullback-Leibler divergence: 0.02061519805447278
-  Overlap area: 0.693569440886
+  Kullback-Leibler divergence: 0.2797615325611383
+  Overlap area: 0.541160962658
 
 pitch_range:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.016585671391763993
-  Overlap area: 0.835263853909
+  Kullback-Leibler divergence: 0.01674579354214564
+  Overlap area: 0.875199653988
 pianoroll
-  Kullback-Leibler divergence: 0.03294109864618362
-  Overlap area: 0.758084395183
+  Kullback-Leibler divergence: 0.007255712632941061
+  Overlap area: 0.813065575152
 
 total_pitch_class_histogram:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.0262949685961536
-  Overlap area: 0.941682518019
+  Kullback-Leibler divergence: 0.013761966822290514
+  Overlap area: 0.901075085065
 pianoroll
-  Kullback-Leibler divergence: 0.01796561701550744
-  Overlap area: 0.809642163624
+  Kullback-Leibler divergence: 0.13470322475996993
+  Overlap area: 0.794209353503
 
 total_used_pitch:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.011524014693386632
-  Overlap area: 0.888464771138
+  Kullback-Leibler divergence: 0.0039946086633705705
+  Overlap area: 0.896821899825
 pianoroll
-  Kullback-Leibler divergence: 0.20220770940441218
-  Overlap area: 0.834419808092
+  Kullback-Leibler divergence: 0.18777779860592672
+  Overlap area: 0.817711134938
 
 note_length_hist:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.3111499370426303
-  Overlap area: 0.328930675306
+  Kullback-Leibler divergence: 0.5926891960470536
+  Overlap area: 0.407788763169
 pianoroll
-  Kullback-Leibler divergence: 0.06904952459357054
-  Overlap area: 0.684850083103
+  Kullback-Leibler divergence: 0.10572754167065372
+  Overlap area: 0.650343841418
 
 avg_IOI:
 ------------------------
 
 melody
-  Kullback-Leibler divergence: 0.2880696905349451
-  Overlap area: 0.385615914358
+  Kullback-Leibler divergence: 0.3425496549596684
+  Overlap area: 0.492327582208
 pianoroll
-  Kullback-Leibler divergence: 0.13949941621090262
-  Overlap area: 0.728850291314
+  Kullback-Leibler divergence: 0.05252390642147985
+  Overlap area: 0.82580963976
 
