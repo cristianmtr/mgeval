@@ -91,15 +91,15 @@ def main(set1, set2, set1name, set2name, dstfolder):
             absolute_measurement += "\n" + '------------------------\n'
             absolute_measurement += "\n" + set1name
             absolute_measurement += "\n" + \
-                '  mean: %s' % np.mean(set1_eval[metrics_list[i]], axis=0)
+                '  mean: %s' % np.nanmean(set1_eval[metrics_list[i]], axis=0)
             absolute_measurement += "\n" + \
-                '  std: %s' % np.std(set1_eval[metrics_list[i]], axis=0)
+                '  std: %s' % np.nanstd(set1_eval[metrics_list[i]], axis=0)
 
             absolute_measurement += "\n\n" + set2name
             absolute_measurement += "\n" + \
-                '  mean: %s' % np.mean(set2_eval[metrics_list[i]], axis=0)
+                '  mean: %s' % np.nanmean(set2_eval[metrics_list[i]], axis=0)
             absolute_measurement += "\n" + \
-                '  std: %s\n\n' % np.std(set2_eval[metrics_list[i]], axis=0)
+                '  std: %s\n\n' % np.nanstd(set2_eval[metrics_list[i]], axis=0)
 
     with open(os.path.join(dstfolder, '1absolute_measurement.txt'), 'w') as f:
         f.writelines(absolute_measurement)
@@ -118,11 +118,25 @@ def main(set1, set2, set1name, set2name, dstfolder):
     set1_intra = np.zeros((num_samples, len(metrics_list), num_samples-1))
     set2_intra = np.zeros((num_samples, len(metrics_list), num_samples-1))
     for i in range(len(metrics_list)):
+        if metrics_list[i] == 'avg_pitch_shift':
+            print('stop')
         for train_index, test_index in loo.split(np.arange(num_samples)):
-            set1_intra[test_index[0]][i] = utils.c_dist(
-                set1_eval[metrics_list[i]][test_index], set1_eval[metrics_list[i]][train_index])
-            set2_intra[test_index[0]][i] = utils.c_dist(
-                set2_eval[metrics_list[i]][test_index], set2_eval[metrics_list[i]][train_index])
+            distances = utils.c_dist(
+                set1_eval[metrics_list[i]][test_index],
+                set1_eval[metrics_list[i]][train_index]
+                )
+            distances_mean = np.nanmean(distances)
+            distances[np.where(np.isnan(distances))] = distances_mean
+            set1_intra[test_index[0]][i] = distances
+            del distances
+
+            distances = utils.c_dist(
+                set2_eval[metrics_list[i]][test_index], 
+                set2_eval[metrics_list[i]][train_index]
+                )
+            distances_mean = np.nanmean(distances)
+            distances[np.where(np.isnan(distances))] = distances_mean
+            set2_intra[test_index[0]][i] = distances
 
     # exhaustive cross-validation for inter-set distances measurement
     loo = LeaveOneOut()
@@ -131,8 +145,13 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     for i in range(len(metrics_list)):
         for train_index, test_index in loo.split(np.arange(num_samples)):
-            sets_inter[test_index[0]][i] = utils.c_dist(
-                set1_eval[metrics_list[i]][test_index], set2_eval[metrics_list[i]])
+            distances = utils.c_dist(
+                set1_eval[metrics_list[i]][test_index],
+                set2_eval[metrics_list[i]]
+                )
+            distances_mean = np.nanmean(distances)
+            distances[np.where(np.isnan(distances))] = distances_mean
+            sets_inter[test_index[0]][i] = distances
 
     # visualization of intra-set and inter-set distances
     plot_set1_intra = np.transpose(
@@ -166,10 +185,18 @@ def main(set1, set2, set1name, set2name, dstfolder):
             plot_set1_intra[i], plot_sets_inter[i])
 
         distance_text += "\n" + set2name
+        # if metrics_list[i] == 'avg_pitch_shift':
+            # print('sotp')
+        plot_set2_intra_i_mean = np.nanmean(plot_set2_intra[i])
+        plot_set2_intra[i][np.where(np.isnan(plot_set2_intra[i]))] = plot_set2_intra_i_mean
         distance_text += "\n" + '  Kullback-Leibler divergence: %s' % utils.kl_dist(
-            plot_set2_intra[i], plot_sets_inter[i])
+                    plot_set2_intra[i], 
+                    plot_sets_inter[i]
+                )
         distance_text += "\n" + '  Overlap area: %s\n\n' % utils.overlap_area(
-            plot_set2_intra[i], plot_sets_inter[i])
+            plot_set2_intra[i], 
+            plot_sets_inter[i]
+        )
 
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
         f.writelines(distance_text)

@@ -1,0 +1,90 @@
+pitch_class_transition_matrix:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 1.6658448318029224
+  Overlap area: 0.868806583637
+hook
+  Kullback-Leibler divergence: 0.15721383232352915
+  Overlap area: 0.664924676685
+
+total_used_note:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.09807141269038105
+  Overlap area: 0.487720089649
+hook
+  Kullback-Leibler divergence: 0.19574363247609022
+  Overlap area: 0.782013229485
+
+note_length_transition_matrix:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.5947743553244367
+  Overlap area: 0.666158922906
+hook
+  Kullback-Leibler divergence: 0.24508258376399356
+  Overlap area: 0.62792665162
+
+avg_pitch_shift:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.18770904354385579
+  Overlap area: 0.727613379088
+hook
+  Kullback-Leibler divergence: 0.03220278026097219
+  Overlap area: 0.84006617918
+
+pitch_range:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.01675021219069158
+  Overlap area: 0.699344737553
+hook
+  Kullback-Leibler divergence: 0.1362948774396578
+  Overlap area: 0.793912959553
+
+total_pitch_class_histogram:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.015902660711466496
+  Overlap area: 0.617496510891
+hook
+  Kullback-Leibler divergence: 0.04255049684262843
+  Overlap area: 0.795666921067
+
+total_used_pitch:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.13538363440876178
+  Overlap area: 0.669853096606
+hook
+  Kullback-Leibler divergence: 0.18972144815164005
+  Overlap area: 0.757945053482
+
+note_length_hist:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.3274525034503011
+  Overlap area: 0.56842531098
+hook
+  Kullback-Leibler divergence: 0.031132444973033444
+  Overlap area: 0.920599126988
+
+avg_IOI:
+------------------------
+
+folk
+  Kullback-Leibler divergence: 0.2673271987040796
+  Overlap area: 0.442950873111
+hook
+  Kullback-Leibler divergence: 0.09525559985125562
+  Overlap area: 0.882482345177
+
