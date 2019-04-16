@@ -1,0 +1,55 @@
+total_used_note:
+------------------------
+
+training
+  mean: [28.07]
+  std: [3.56722581]
+
+melody
+  mean: [30.76]
+  std: [1.44996552]
+
+avg_pitch_shift:
+------------------------
+
+training
+  mean: [2.7961137]
+  std: [0.64725007]
+
+melody
+  mean: [2.29312931]
+  std: [0.3875096]
+
+pitch_range:
+------------------------
+
+training
+  mean: [14.11]
+  std: [3.49254921]
+
+melody
+  mean: [14.1]
+  std: [5.80603135]
+
+total_used_pitch:
+------------------------
+
+training
+  mean: [8.39]
+  std: [1.84875634]
+
+melody
+  mean: [7.72]
+  std: [2.53803073]
+
+avg_IOI:
+------------------------
+
+training
+  mean: [0.28640181]
+  std: [0.04193408]
+
+melody
+  mean: [0.25943303]
+  std: [0.01343301]
+

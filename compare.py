@@ -15,7 +15,7 @@ parser.add_argument('firstname',type=str, help="name of first set")
 parser.add_argument('second',type=str, help="dir to second set")
 parser.add_argument('secondname',type=str, help="name of second set")
 parser.add_argument('comparison',type=str, help="comparison folder/name")
-parser.add_argument('--mid_pattern', type=str, default='temp*.mid', help="pattern for midi files in directories. default = 'temp*.mid'")
+parser.add_argument('--mid_pattern', type=str, default='*.mid', help="pattern for midi files in directories. default = '*.mid'")
 args = parser.parse_args()
 
 globstr1 = os.path.join(args.first, args.mid_pattern)

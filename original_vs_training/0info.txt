@@ -1,0 +1,1 @@
+Comparison between D:\data\folkdataset\7_comparison\*.mid and D:\data\thesis_model2\model_folk100k_melody_bi2lstm32_attention\samples\blood_transposed\*.mid
