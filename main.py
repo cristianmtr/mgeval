@@ -173,30 +173,37 @@ def main(set1, set2, set1name, set2name, dstfolder):
         plt.clf()
 
     # the difference of intra-set and inter-set distances.
+    # 0 is KL
+    # 1 is OA
+    inter_sets_distances = np.zeros((len(metrics_list), 2))
     distance_text = ''
     for i in range(0, len(metrics_list)):
         print(metrics_list[i])
         distance_text += metrics_list[i] + ':\n'
         distance_text += '------------------------\n' 
         distance_text += "\n" + set1name
-        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % utils.kl_dist(
+        kl = utils.kl_dist(
             plot_set1_intra[i], plot_sets_inter[i])
-        distance_text += "\n" + '  Overlap area: %s' % utils.overlap_area(
+        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % kl
+        oa = utils.overlap_area(
             plot_set1_intra[i], plot_sets_inter[i])
+        distance_text += "\n" + '  Overlap area: %s' % oa
 
         distance_text += "\n" + set2name
         # if metrics_list[i] == 'avg_pitch_shift':
             # print('sotp')
         plot_set2_intra_i_mean = np.nanmean(plot_set2_intra[i])
         plot_set2_intra[i][np.where(np.isnan(plot_set2_intra[i]))] = plot_set2_intra_i_mean
-        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % utils.kl_dist(
+        kl = utils.kl_dist(
                     plot_set2_intra[i], 
                     plot_sets_inter[i]
                 )
-        distance_text += "\n" + '  Overlap area: %s\n\n' % utils.overlap_area(
+        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % kl
+        oa = utils.overlap_area(
             plot_set2_intra[i], 
             plot_sets_inter[i]
         )
+        distance_text += "\n" + '  Overlap area: %s\n\n' % oa
 
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
         f.writelines(distance_text)
