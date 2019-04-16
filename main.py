@@ -173,7 +173,6 @@ def main(set1, set2, set1name, set2name, dstfolder):
     # the difference of intra-set and inter-set distances.
     # 0 is KL
     # 1 is OA
-    inter_sets_distances = np.zeros((len(metrics_list), 2))
     distance_text = ''
     for i in range(0, len(metrics_list)):
         print(metrics_list[i])
