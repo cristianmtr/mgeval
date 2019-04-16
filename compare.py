@@ -39,6 +39,7 @@ if len(set2) > num_samples:
 set2name = args.secondname
 
 dstfolder = args.comparison
+dstfolder = os.path.join('comparisons', dstfolder)
 if not os.path.exists(dstfolder):
     os.mkdir(dstfolder)
 
