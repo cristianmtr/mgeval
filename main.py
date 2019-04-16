@@ -118,8 +118,6 @@ def main(set1, set2, set1name, set2name, dstfolder):
     set1_intra = np.zeros((num_samples, len(metrics_list), num_samples-1))
     set2_intra = np.zeros((num_samples, len(metrics_list), num_samples-1))
     for i in range(len(metrics_list)):
-        if metrics_list[i] == 'avg_pitch_shift':
-            print('stop')
         for train_index, test_index in loo.split(np.arange(num_samples)):
             distances = utils.c_dist(
                 set1_eval[metrics_list[i]][test_index],
