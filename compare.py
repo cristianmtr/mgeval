@@ -5,9 +5,6 @@ import random
 
 from main import main
 
-num_samples = 100
-print 'we have %s samples' % num_samples
-
 parser = argparse.ArgumentParser(
     description="compare two sets")
 parser.add_argument('first',type=str, help="dir to first set")
@@ -17,6 +14,9 @@ parser.add_argument('secondname',type=str, help="name of second set")
 parser.add_argument('comparison',type=str, help="comparison folder/name")
 parser.add_argument('--mid_pattern', type=str, default='*.mid', help="pattern for midi files in directories. default = '*.mid'")
 args = parser.parse_args()
+
+num_samples = 100
+print 'we have %s samples' % num_samples
 
 globstr1 = os.path.join(args.first, args.mid_pattern)
 set1 = glob.glob(
