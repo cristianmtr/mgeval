@@ -3,3 +3,4 @@
 .ipynb_checkpoints/
 *.py.bak
 comparisons/*
+__pycache__/*
