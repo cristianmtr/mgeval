@@ -171,7 +171,8 @@ def main(set1, set2, set1name, set2name, dstfolder):
         plt.clf()
 
     # the difference of intra-set and inter-set distances.
-    
+    # what do we need to store
+    # for each set, absolute measures
     table = np.zeros((len(metrics_list), 10))
     distance_text = ''
     for i in range(0, len(metrics_list)):
