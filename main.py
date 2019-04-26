@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import pandas as pd
 import output
 import os
 import glob
@@ -34,6 +35,7 @@ from sklearn.model_selection import LeaveOneOut
 
 def main(set1, set2, set1name, set2name, dstfolder):
 
+
     num_samples = len(set1)
     set1_eval = {
         # pitch related
@@ -49,7 +51,43 @@ def main(set1, set2, set1name, set2name, dstfolder):
         'note_length_transition_matrix': np.zeros((num_samples, 12, 12)),
     }
 
+    feat_acronyms = {
+        'total_used_pitch': 'PC',
+        'pitch_range': 'PR',
+        'avg_pitch_shift': 'PI',
+        'total_pitch_class_histogram': 'PCH',
+        'pitch_class_transition_matrix': 'PCTM',
+        # rhythm
+        'total_used_note': 'NC',
+        'avg_IOI': 'IOI',
+        'note_length_hist': 'NLH',
+        'note_length_transition_matrix': 'NLTM'
+    }
+
     metrics_list = list(set1_eval.keys())
+    table = []
+    for metric in ['PC', 'PR', 'PI', 'PCH', 'PCTM', 'NC', 'IOI', 'NLH', 'NLTM']:
+        metric_row = [metric]
+        metric_row.extend(['-']*10)
+        table.append(metric_row)
+
+    table = pd.DataFrame(np.array(table,dtype=object),
+        columns=[
+        "feat.",
+        #
+        "abs_mean1", #
+        "abs_sd1", #
+        "intra_set_mean1", #
+        "intra_set_sd1", #
+        #
+        "abs_mean2", #
+        "abs_sd2", #
+        "intra_set_mean2", #
+        "intra_set_sd2", #
+        #
+        "inter_set_KLD",
+        "inter_set_OA"
+    ]).set_index('feat.')
 
     for i in range(0, num_samples):
         feature = core.extract_feature(set1[i])
@@ -90,16 +128,30 @@ def main(set1, set2, set1name, set2name, dstfolder):
             absolute_measurement += metrics_list[i] + ':'
             absolute_measurement += "\n" + '------------------------\n'
             absolute_measurement += "\n" + set1name
+
+            abs_mean1 = '%.3f' %np.nanmean(set1_eval[metrics_list[i]], axis=0)[0]
+            abs_sd1 = '%.3f' %np.nanstd(set1_eval[metrics_list[i]], axis=0)[0]
+
+            table.loc[feat_acronyms[metrics_list[i]], 'abs_mean1'] = abs_mean1
+            table.loc[feat_acronyms[metrics_list[i]], 'abs_sd1'] = abs_sd1
+
             absolute_measurement += "\n" + \
-                '  mean: %s' % np.nanmean(set1_eval[metrics_list[i]], axis=0)
+                '  mean: %s' % abs_mean1
             absolute_measurement += "\n" + \
-                '  std: %s' % np.nanstd(set1_eval[metrics_list[i]], axis=0)
+                '  std: %s' % abs_sd1
 
             absolute_measurement += "\n\n" + set2name
+
+            abs_mean2 = '%.3f' %np.nanmean(set2_eval[metrics_list[i]], axis=0)[0]
+            abs_sd2 = '%.3f' %np.nanstd(set2_eval[metrics_list[i]], axis=0)[0]
+            
             absolute_measurement += "\n" + \
-                '  mean: %s' % np.nanmean(set2_eval[metrics_list[i]], axis=0)
+                '  mean: %s' % abs_mean2
             absolute_measurement += "\n" + \
-                '  std: %s\n\n' % np.nanstd(set2_eval[metrics_list[i]], axis=0)
+                '  std: %s\n\n' % abs_sd2
+
+            table.loc[feat_acronyms[metrics_list[i]], 'abs_mean2'] = abs_mean2
+            table.loc[feat_acronyms[metrics_list[i]], 'abs_sd2'] = abs_sd2
 
     with open(os.path.join(dstfolder, '1absolute_measurement.txt'), 'w') as f:
         f.writelines(absolute_measurement)
@@ -163,6 +215,29 @@ def main(set1, set2, set1name, set2name, dstfolder):
         sns.kdeplot(plot_sets_inter[i], label='inter')
         sns.kdeplot(plot_set2_intra[i], label='intra %s' % set2name)
 
+        intra_set_mean1 = '%.3f' %np.nanmean(plot_set1_intra[i], axis=0)
+        intra_set_sd1 = '%.3f' %np.nanstd(plot_set1_intra[i], axis=0)
+
+        table.loc[feat_acronyms[metrics_list[i]], 'intra_set_mean1'] = intra_set_mean1
+        table.loc[feat_acronyms[metrics_list[i]], 'intra_set_sd1'] = intra_set_sd1
+
+        intra_set_mean2 = '%.3f' %np.nanmean(plot_set2_intra[i], axis=0)
+        intra_set_sd2 = '%.3f' %np.nanstd(plot_set2_intra[i], axis=0)
+
+        table.loc[feat_acronyms[metrics_list[i]], 'intra_set_mean2'] = intra_set_mean2
+        table.loc[feat_acronyms[metrics_list[i]], 'intra_set_sd2'] = intra_set_sd2
+
+        kl = '%.3f' %utils.kl_dist(
+            plot_set1_intra[i],
+            plot_set2_intra[i]
+        )
+        oa = '%.3f' %utils.overlap_area(
+            plot_set1_intra[i],
+            plot_set2_intra[i]
+        )
+        table.loc[feat_acronyms[metrics_list[i]], 'inter_set_KLD'] = kl
+        table.loc[feat_acronyms[metrics_list[i]], 'inter_set_OA'] = oa
+
         plt.title(metrics_list[i])
         plt.xlabel('Euclidean distance')
         plt.xlabel('Density')
@@ -171,40 +246,54 @@ def main(set1, set2, set1name, set2name, dstfolder):
         plt.clf()
 
     # the difference of intra-set and inter-set distances.
-    # what do we need to store
-    # for each set, absolute measures
-    table = np.zeros((len(metrics_list), 10))
     distance_text = ''
     for i in range(0, len(metrics_list)):
         print(metrics_list[i])
         distance_text += metrics_list[i] + ':\n'
         distance_text += '------------------------\n' 
         distance_text += "\n" + set1name
-        kl = utils.kl_dist(
-            plot_set1_intra[i], plot_sets_inter[i])
+
+        kl = '%.3f' %utils.kl_dist(
+            plot_set1_intra[i],
+            plot_sets_inter[i]
+        )
+        oa = '%.3f' %utils.overlap_area(
+            plot_set1_intra[i],
+            plot_sets_inter[i]
+        )
+
+        # table.loc[feat_acronyms[metrics_list[i]], 'inter_set_KLD'] = kl
+        # table.loc[feat_acronyms[metrics_list[i]], 'inter_set_OA'] = oa
+
         distance_text += "\n" + '  Kullback-Leibler divergence: %s' % kl
-        oa = utils.overlap_area(
-            plot_set1_intra[i], plot_sets_inter[i])
         distance_text += "\n" + '  Overlap area: %s' % oa
 
         distance_text += "\n" + set2name
-        # if metrics_list[i] == 'avg_pitch_shift':
-            # print('sotp')
+
         plot_set2_intra_i_mean = np.nanmean(plot_set2_intra[i])
         plot_set2_intra[i][np.where(np.isnan(plot_set2_intra[i]))] = plot_set2_intra_i_mean
-        kl = utils.kl_dist(
+
+        kl = '%.3f' %utils.kl_dist(
                     plot_set2_intra[i], 
                     plot_sets_inter[i]
                 )
-        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % kl
-        oa = utils.overlap_area(
+        oa = '%.3f' %utils.overlap_area(
             plot_set2_intra[i], 
             plot_sets_inter[i]
         )
+
+        distance_text += "\n" + '  Kullback-Leibler divergence: %s' % kl
         distance_text += "\n" + '  Overlap area: %s\n\n' % oa
 
     with open(os.path.join(dstfolder, '4distance_text.txt'), 'w') as f:
         f.writelines(distance_text)
+
+    # save table
+    table.columns = ['mean', 'SD', 'intra-set mean', 'intra-set SD', 'mean', 'SD', 'intra-set mean', 'intra-set SD', 'KLD', 'OA']
+    print(table.to_string())
+    table.to_csv(os.path.join(dstfolder, 'table.csv'))
+    with open(os.path.join(dstfolder, 'table.tex'), 'w') as f:
+        f.write(table.to_latex())
 
     # pitch tm
     mpl.rc('text', usetex=True)
@@ -227,7 +316,7 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     plt.clf()
     plt.figure(figsize=(12,12))
-    sns.heatmap(np.mean(set1_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues', vmax=1.7)
+    sns.heatmap(np.mean(set1_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues')
     sns.set(font_scale=1.4)
     plt.xticks([i+.5 for i in range(len(note_names))], note_names)
     plt.yticks([i+.5 for i in range(len(note_names))], note_names)
@@ -237,7 +326,7 @@ def main(set1, set2, set1name, set2name, dstfolder):
 
     plt.clf()
     plt.figure(figsize=(12,12))
-    sns.heatmap(np.mean(set2_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues', vmax=1.7)
+    sns.heatmap(np.mean(set2_eval['pitch_class_transition_matrix'],axis=0), cmap='Blues')
     sns.set(font_scale=1.4)
     plt.xticks([i+.5 for i in range(len(note_names))], note_names)
     plt.yticks([i+.5 for i in range(len(note_names))], note_names)

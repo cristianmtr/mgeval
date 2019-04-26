@@ -5,12 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "compare.py with example",
+            "name": "compare.py folk hook",
             "type": "python",
             "request": "launch",
             "program": "D:\\data\\mgeval2\\compare.py",
             "console": "integratedTerminal",
             "args": ["d:\\data\\folkdataset\\7_comparison", "folk","d:\\data\\hooktheory_dataset\\7_comparison", "hook", "datasets_folk_vs_hook", "--mid_pattern=*.mid"]
+        },
+        {
+            "name": "compare.py folk folk",
+            "type": "python",
+            "request": "launch",
+            "program": "D:\\data\\mgeval2\\compare.py",
+            "console": "integratedTerminal",
+            "args": ["d:\\data\\folkdataset\\7_comparison", "folk1","d:\\data\\folkdataset\\7_comparison", "folk2", "datasets_folk_vs_folk", "--mid_pattern=*.mid"]
         },
         {
             "name": "Python: Remote Attach",
